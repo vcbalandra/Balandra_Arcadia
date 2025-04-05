@@ -4,7 +4,7 @@ import customFetch from '../utils/customFetch';
 
 export const loader = async () => {
     try {
-      const response = await  customFetch.get('/admin/all-events');
+      const response = await  customFetch.get('/event/all-events');
       return response.data;
     } catch (error) {
      console.log(error);

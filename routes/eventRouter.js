@@ -1,25 +1,25 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
-import Event from '../models/Event.js';  // Assuming Event is a Mongoose model
-import { authenticateUser } from '../middleware/authMiddleware.js'; // Your authentication middleware
+import Event from '../models/Event.js'; 
+import { authenticateUser } from '../middleware/authMiddleware.js'; 
 import  { getEvents }  from '../controllers/eventController.js'; 
 
 const router = express.Router();
 
-// Set up multer storage configuration
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');  // Ensure 'uploads' folder exists in your project
+    cb(null, 'uploads/');  
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));  // Set unique filename
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+  limits: { fileSize: 5 * 1024 * 1024 }, 
   fileFilter: (req, file, cb) => {
     const fileTypes = /jpg|jpeg|png|gif/;
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
@@ -32,7 +32,7 @@ const upload = multer({
   },
 });
 
-// Routes
+
 router.get('/', authenticateUser, getEvents); 
 router.post('/add-event', authenticateUser, upload.single('eventImage'), async (req, res) => {
   try {

@@ -29,7 +29,7 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173', // Allow environment variable for CORS origin
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,  
 };
