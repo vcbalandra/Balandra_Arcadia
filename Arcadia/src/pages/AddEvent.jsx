@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Card, Col, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import StyledCardImg  from '../assets/wrappers/AddEvent';
 import customFetch from "../utils/customFetch";
 import Cookies from 'js-cookie';
 
@@ -121,7 +122,7 @@ const AddEvent = () => {
     setRegistrationLink(event.registrationLink);
     setEventDescription(event.eventDescription);
     setEventDate(event.eventDate);
-    setIsEditing(true); // Set editing mode
+    setIsEditing(true); 
     setShowModal(true);
   };
 
@@ -233,11 +234,10 @@ const AddEvent = () => {
       <Row className="mt-4">
         {events.map((event) => (
           <Col key={event._id} sm={12} md={6} lg={4}>
-            <Card className="mb-4">
-              <Card.Img variant="top" src={`/uploads/${event.eventImage}`} />
+            <Card className="mb-4"  style={{ height: '400px' }}>
+            <StyledCardImg  variant="top" src={`http://localhost:5100/${event.eventImage}`} alt="Event Image"/>
               <Card.Body>
                 <Card.Title>{event.eventTitle}</Card.Title>
-                <Card.Text>{event.eventDescription}</Card.Text>
                 <Button variant="primary" onClick={() => handleEditEvent(event)}>
                   Edit
                 </Button>
