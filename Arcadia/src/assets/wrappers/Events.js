@@ -178,7 +178,17 @@ const Wrapper = styled.section`
 }
 
   .previous {
-    background-color: #e6fcf5;
+  background-color: #e6fcf5;
+  }
+
+  .previous-img {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  height: 20rem;
+  width: 40rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  object-fit: cover;
   }
 
   .arcadia-word {
@@ -267,7 +277,7 @@ const Wrapper = styled.section`
       font-size: 14px;
     }
     
-    .upcoming-img {
+    .upcoming-img, .previous-img {
       margin-top: 1rem;
       margin-left: 2rem;
       height: 20rem;

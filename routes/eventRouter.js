@@ -62,6 +62,7 @@ router.post('/add-event', authenticateUser, upload.single('eventImage'), async (
     });
   }
 });
-router.get('/all-events',authenticateUser, getEvents);
+router.get('/all-events', getEvents);
+
 
 export default router;

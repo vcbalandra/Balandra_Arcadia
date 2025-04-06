@@ -60,9 +60,9 @@ app.get('/', (req, res) => {
 });
 
 // Define routes
-app.use('/admin', authenticateUser, adminRouter); // Admin routes
-app.use('/auth', authRouter); // Auth routes
-app.use('/event', eventRouter); // Event routes
+app.use('/admin', authenticateUser, adminRouter);
+app.use('/auth', authRouter); 
+app.use('/event', eventRouter); 
 
 // Handle 404
 app.use('*', (req, res) => {
