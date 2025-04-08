@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDashboardContext } from '../pages/DashboardLayout'; 
 import customFetch from '../utils/customFetch';
-import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-
-
-const userQuery = {
-  queryKey: ['user'],
-  queryFn: async () => {
-    const { data } = await customFetch.get('/admin/current-user');
-    return data;
-  },
-};
 
 const Profile = () => {
   const navigate = useNavigate();
 
-  const { data: user, isLoading, isError } = useQuery(userQuery);
+  const { user } = useDashboardContext();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -33,7 +24,7 @@ const Profile = () => {
         lastName: user.lastName || '',
         email: user.email || '',
         location: user.location || '',
-        avatar: user.avatar || null,
+        avatar: user.avatar || null, 
       });
     }
   }, [user]);
@@ -64,7 +55,7 @@ const Profile = () => {
       const response = await customFetch.patch('/admin/update-user', data);
       if (response.data.success) {
         toast.success('Profile updated successfully');
-        navigate('/dashboard');  
+        navigate('/dashboard');
       } else {
         toast.error('Failed to update profile');
       }
@@ -74,12 +65,8 @@ const Profile = () => {
     }
   };
 
-  if (isLoading) {
+  if (!user) {
     return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading user data. Please try again later.</div>;
   }
 
   return (

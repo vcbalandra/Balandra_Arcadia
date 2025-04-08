@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   getCurrentUser,
-  // updateUser,
+  updateUser,
 } from '../controllers/userController.js';
 import { validateUpdateUserInput } from '../middleware/validationMiddleware.js';
 import {
