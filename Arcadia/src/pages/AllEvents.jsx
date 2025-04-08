@@ -18,9 +18,11 @@ export const loader = async () => {
 };
 
 const AllEvents = () => {
-  const [events, setEvents] = useState([]); 
-  const [filteredEvents, setFilteredEvents] = useState([]); 
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const eventsPerPage = 10; 
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -48,7 +50,7 @@ const AllEvents = () => {
         const eventDate = new Date(event.eventDate);
 
         if (filter === 'previous') {
-          return eventDate < currentDate; 
+          return eventDate < currentDate;
         } else if (filter === 'upcoming') {
           return eventDate >= currentDate;
         }
@@ -58,6 +60,10 @@ const AllEvents = () => {
 
     setFilteredEvents(filterEvents());
   }, [filter, events]);
+
+  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const currentEvents = filteredEvents.slice(indexOfFirstEvent, indexOfLastEvent);
 
   const getStatus = (eventDate) => {
     const currentDate = new Date();
@@ -69,12 +75,15 @@ const AllEvents = () => {
     return status === 'Upcoming' ? 'badge bg-success' : 'badge bg-danger';
   };
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
+
   return (
     <div>
       <h2>Event List</h2>
 
       <div>
-       
         <select
           id="eventFilter"
           value={filter}
@@ -98,12 +107,12 @@ const AllEvents = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredEvents.map((event, index) => {
+          {currentEvents.map((event, index) => {
             const status = getStatus(event.eventDate);
             const statusClass = getStatusClass(status);
             return (
               <tr key={event._id}>
-                <td>{index + 1}</td>
+                <td>{index + 1 + (currentPage - 1) * eventsPerPage}</td>
                 <td>{event.eventTitle}</td>
                 <td>{event.eventDescription}</td>
                 <td>{formatDate(event.eventDate)}</td>
@@ -111,12 +120,30 @@ const AllEvents = () => {
                   <span className={statusClass} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {status}
                   </span>
-                </td> 
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
+      <div className="pagination">
+        <button
+          className="btn btn-outline-success"
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
+        <button
+          className="btn btn-outline-success"
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

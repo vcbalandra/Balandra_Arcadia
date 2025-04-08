@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Card, Col, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import StyledCardImg  from '../assets/wrappers/AddEvent';
+import StyledCardImg from '../assets/wrappers/AddEvent';
 import customFetch from "../utils/customFetch";
 import Cookies from 'js-cookie';
 
@@ -14,12 +14,11 @@ const AddEvent = () => {
   const [eventDescription, setEventDescription] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventImage, setEventImage] = useState(null);
-
+  const [eventToUpdate, setEventToUpdate] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false); 
   const [eventToDelete, setEventToDelete] = useState(null); 
   const [isEditing, setIsEditing] = useState(false); 
 
-  
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -73,15 +72,49 @@ const AddEvent = () => {
       });
 
       if (response.data.success) {
-        toast.success(isEditing ? "Event updated successfully!" : "Event created successfully!");
+        toast.success("Event created successfully!");
         resetForm();
-        fetchEvents(); 
+        fetchEvents();
       } else {
-        toast.error(response.data.message || "Failed to create/update event!");
+        toast.error(response.data.message || "Failed to create event!");
       }
     } catch (error) {
-      console.error("Error creating/updating event:", error);
-      toast.error("Failed to create/update event!");
+      console.error("Error creating event:", error);
+      toast.error("Failed to create event!");
+    }
+  };
+
+  const handleUpdateEvent = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("eventTitle", eventTitle);
+    formData.append("registrationLink", registrationLink);
+    formData.append("eventDescription", eventDescription);
+    formData.append("eventDate", eventDate);
+    if (eventImage) {
+      formData.append("eventImage", eventImage);
+    }
+
+    try {
+      const token = Cookies.get('token');
+      const response = await customFetch.put(`/event/update-event/${eventToUpdate._id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.data.success) {
+        toast.success("Event updated successfully!");
+        resetForm();
+        fetchEvents();
+      } else {
+        toast.error(response.data.message || "Failed to update event!");
+      }
+    } catch (error) {
+      console.error("Error updating event:", error);
+      toast.error("Failed to update event!");
     }
   };
 
@@ -91,8 +124,8 @@ const AddEvent = () => {
     setEventDescription("");
     setEventDate("");
     setEventImage(null);
-    setShowModal(false); 
-    setIsEditing(false); 
+    setShowModal(false);
+    setIsEditing(false);
   };
 
   const handleDeleteEvent = async () => {
@@ -106,8 +139,8 @@ const AddEvent = () => {
 
       if (response.data.success) {
         toast.success("Event deleted successfully!");
-        setShowDeleteModal(false); 
-        fetchEvents(); 
+        setShowDeleteModal(false);
+        fetchEvents();
       } else {
         toast.error(response.data.message || "Failed to delete event!");
       }
@@ -122,7 +155,9 @@ const AddEvent = () => {
     setRegistrationLink(event.registrationLink);
     setEventDescription(event.eventDescription);
     setEventDate(event.eventDate);
-    setIsEditing(true); 
+    setEventImage(null);
+    setIsEditing(true);
+    setEventToUpdate(event);
     setShowModal(true);
   };
 
@@ -133,7 +168,7 @@ const AddEvent = () => {
 
   return (
     <div className="container">
-      <Button variant="primary" onClick={() => { setIsEditing(false); setShowModal(true); }}>
+      <Button variant="success" onClick={() => { setIsEditing(false); setShowModal(true); }}>
         Add Event
       </Button>
 
@@ -143,7 +178,7 @@ const AddEvent = () => {
         </Modal.Header>
 
         <Modal.Body>
-          <Form onSubmit={handleCreateEvent} encType="multipart/form-data">
+          <Form onSubmit={isEditing ? handleUpdateEvent : handleCreateEvent} encType="multipart/form-data">
             <Form.Group className="mb-3">
               <Form.Label>Event Title</Form.Label>
               <Form.Control
@@ -158,7 +193,7 @@ const AddEvent = () => {
             <Form.Group className="mb-3">
               <Form.Label>Registration Link</Form.Label>
               <Form.Control
-                type="text"
+                type="url"
                 placeholder="Enter registration link"
                 value={registrationLink}
                 onChange={(e) => setRegistrationLink(e.target.value)}
@@ -184,7 +219,8 @@ const AddEvent = () => {
                 type="date"
                 value={eventDate}
                 onChange={(e) => setEventDate(e.target.value)}
-                required
+                required={!isEditing}
+                min={new Date().toISOString().split('T')[0]}
               />
             </Form.Group>
 
@@ -194,7 +230,7 @@ const AddEvent = () => {
                 type="file"
                 onChange={handleFileChange}
                 accept="image/*"
-                required={!isEditing} 
+                required={!isEditing}
               />
               <div className="mt-2">
                 <strong>Selected Image:</strong>
@@ -211,7 +247,6 @@ const AddEvent = () => {
         </Modal.Body>
       </Modal>
 
-      {/* Delete Confirmation Modal */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Deletion</Modal.Title>
@@ -234,8 +269,8 @@ const AddEvent = () => {
       <Row className="mt-4">
         {events.map((event) => (
           <Col key={event._id} sm={12} md={6} lg={4}>
-            <Card className="mb-4"  style={{ height: '400px' }}>
-            <StyledCardImg  variant="top" src={`http://localhost:5100/${event.eventImage}`} alt="Event Image"/>
+            <Card className="mb-4" style={{ height: '400px' }}>
+              <StyledCardImg variant="top" src={`http://localhost:5100/${event.eventImage}`} alt="Event Image"/>
               <Card.Body>
                 <Card.Title>{event.eventTitle}</Card.Title>
                 <Button variant="primary" onClick={() => handleEditEvent(event)}>

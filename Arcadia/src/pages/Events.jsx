@@ -7,6 +7,9 @@ import customFetch from '../utils/customFetch';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import heroImage from '../assets/images/hero-img.jpg';
+import { Modal, Button } from 'react-bootstrap'; 
+import dialogues from '../assets/images/dialogues.jpg';
+import hackathon from '../assets/images/hackathon.jpg';
 
 export const loader = async () => {
   try {
@@ -46,6 +49,9 @@ const Events = () => {
   const [previousEvents, setPreviousEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -59,7 +65,7 @@ const Events = () => {
 
         setUpcomingEvents(upcoming);
         setPreviousEvents(previous);
-        setEvents(allEvents); 
+        setEvents(allEvents);
       } catch (error) {
         console.error('Error fetching events:', error);
       } finally {
@@ -69,6 +75,16 @@ const Events = () => {
 
     fetchEvents();
   }, []);
+
+  const handleViewEvent = (event) => {
+    setSelectedEvent(event);
+    setShowModal(true); 
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedEvent(null);
+  };
 
   return (
     <div>
@@ -92,7 +108,7 @@ const Events = () => {
               <p className="dialogues-sessions">Forums, Panel Discussions, Fireside Chats, Summits</p>
             </div>
             <div className="image-container">
-              <img src={heroImage} alt="Hero Image" className="dialogueImg" />
+              <img src={dialogues} alt="Hero Image" className="dialogueImg" />
             </div>
           </div>
         </section>
@@ -100,7 +116,7 @@ const Events = () => {
         <section id="campaigns" className="campaigns">
           <div className="campaigns-container">
             <div className="image-container">
-              <img src={heroImage} alt="Hero Image" className="campaignImg" />
+              <img src={hackathon} alt="Hero Image" className="campaignImg" />
             </div>
             <div className="row">
               <h3 className="campaigns-title">HACKATHONS AND CAMPAIGNS</h3>
@@ -124,6 +140,7 @@ const Events = () => {
                     <div key={event._id} className="embla__slide">
                       <h4 className='event-title'>{event.eventTitle}</h4>
                       {event.eventImage && <img src={`http://localhost:5100/${event.eventImage}`} alt="Event" className="upcoming-img" />}
+                      <button className='view-btn' onClick={() => handleViewEvent(event)}>View Event</button>
                     </div>
                   ))
                 )}
@@ -144,6 +161,7 @@ const Events = () => {
                     <div key={event._id} className="embla__slide">
                       <h5 className='event-title'>{event.eventTitle}</h5>
                       {event.eventImage && <img src={`http://localhost:5100/${event.eventImage}`} alt="Event" className="previous-img" />}
+                      <button className='view-btn' onClick={() => handleViewEvent(event)}>View Event</button>
                     </div>
                   ))
                 )}
@@ -151,6 +169,27 @@ const Events = () => {
             </div>
           </div>
         </section>
+
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedEvent?.eventTitle}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>{selectedEvent?.eventDescription}</p>
+            {selectedEvent && (
+            new Date(selectedEvent.eventDate) >= new Date() ? (
+              <Button variant="success" href={selectedEvent.registrationLink} target="_blank">
+                Register
+              </Button>
+            ) : (
+              <Button variant="secondary" disabled>
+                Event Closed
+              </Button>
+            )
+          )}
+          </Modal.Body>
+        </Modal>
+
         <Footer />
       </Wrapper>
     </div>

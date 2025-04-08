@@ -46,7 +46,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)} 
         />
           <FormRow 
-            type={showPassword ? 'text' : 'password'}  // Toggle between 'text' and 'password' based on showPassword state
+            type={showPassword ? 'text' : 'password'}  
             name="password" 
             labelText="Password" 
             value={password} 

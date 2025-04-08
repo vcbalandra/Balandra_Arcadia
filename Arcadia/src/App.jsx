@@ -20,14 +20,16 @@ import {
   Login,
   AddEvent,
   AllEvents,
+  Contact,
 } from './pages';
 
 import { loader as allEventsLoader } from './pages/AllEvents';
+import { loader as contactLoader } from './pages/Contact';
 import { loader as eventsLoader } from './pages/Events';
 import { loader as knowledgeLoader } from './pages/Knowledge';
 import { loader as innovationsLoader } from './pages/Innovations';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
-import { action as profileAction } from './pages/Profile';
+// import { action as profileAction } from './pages/Profile';
 import { loader as adminLoader } from './pages/Admin';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
@@ -84,7 +86,7 @@ const App = () => {
             {
               path: 'profile',
               element: <Profile />,
-              action: profileAction,
+              // action: profileAction,
             },
             {
               path: 'admin',
@@ -100,13 +102,18 @@ const App = () => {
         },
         {
           path: '/knowledge-hub',
-          element: <Knowledge />,
+          element: <Knowledge/>,
           loader: knowledgeLoader,
         },
         {
           path: '/innovation-solutions-exchange',
           element: <Innovations />,
           loader: innovationsLoader,
+        },
+        {
+          path: '/contact',
+          element: <Contact />,
+          loader: contactLoader,
         },
       ],
     },

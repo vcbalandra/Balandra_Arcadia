@@ -65,6 +65,7 @@ const Wrapper = styled.section`
     text-align: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
  }
 
 .dialogues-title, .campaigns-title, .upcoming-title, .previous-title {
@@ -140,7 +141,6 @@ const Wrapper = styled.section`
 
   .upcoming-img {
     margin-top: 1rem;
-    margin-left: 2rem;
     height: 20rem;
     width: 40rem;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
@@ -149,7 +149,7 @@ const Wrapper = styled.section`
   }
 
   .embla {
-  width: 100vw; 
+  width: 90vw; 
   height: 100vh; 
   overflow: hidden; 
   display: flex;
@@ -175,6 +175,19 @@ const Wrapper = styled.section`
   text-align: center; 
   flex-direction: column;
   color: #000000;
+  position: relative;
+}
+
+.event-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Optional for readability */
+  text-align: center;
 }
 
   .previous {
@@ -183,13 +196,25 @@ const Wrapper = styled.section`
 
   .previous-img {
   margin-top: 1rem;
-  margin-left: 2rem;
   height: 20rem;
   width: 40rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   object-fit: cover;
   }
+
+  .view-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #008080;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background-color: rgb(9, 161, 161);
+}
 
   .arcadia-word {
   color: #008080;
@@ -200,7 +225,7 @@ const Wrapper = styled.section`
 
   @media (max-width: 768px) {
     .section-hero, .dialogues, .campaigns, .upcoming, .previous {
-      width: 100%;
+      width: 100vw;
     }
 
     .dialogues-container,
@@ -242,11 +267,16 @@ const Wrapper = styled.section`
     flex: 0 0 100%; 
     margin-top: 6rem;
   }
+
+  .view-btn {
+    padding: 8px 16px; /* Smaller padding on medium-sized screens */
+    font-size: 14px; /* Smaller font size */
+  }
   }
 
   @media (max-width: 480px) {
     .section-hero, .dialogues, .campaigns, .upcoming, .previous {
-      width: 100%;
+      width: 100vw;
     }
     
     .dialogues-title,
@@ -279,7 +309,6 @@ const Wrapper = styled.section`
     
     .upcoming-img, .previous-img {
       margin-top: 1rem;
-      margin-left: 2rem;
       height: 20rem;
       width: 25rem;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
@@ -295,6 +324,11 @@ const Wrapper = styled.section`
 
   .embla__slide {
     flex: 0 0 100%; 
+  }
+
+  .view-btn {
+    padding: 6px 12px; /* Even smaller padding for mobile */
+    font-size: 12px; /* Smaller font size for mobile */
   }
   
   .arcadia-word {

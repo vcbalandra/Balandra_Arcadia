@@ -90,6 +90,12 @@ const Section = styled.section`
     object-fit: cover;
   }
 
+  .card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9; 
+  object-fit: cover; 
+}
+
   .growing,
   .keys,
   .focus,
@@ -160,11 +166,20 @@ const Section = styled.section`
 }
 
 .card {
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
+  background-color: #fff; /* A cleaner white background for a modern look */
+  border: 1px solid #ddd; /* Light border for subtle separation */
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px; /* Slightly rounded corners for modern aesthetics */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures content is spread out well */
+  height: 100%;
+}
+
+.card-title {
+  margin-top: 1rem;
 }
 
 .card h2 {
@@ -189,6 +204,10 @@ const Section = styled.section`
       height: 15rem;
       width: 30rem;
     }
+
+      .card-image {
+    height: auto;  
+  }
 
     .container {
       padding: 1rem;
@@ -247,7 +266,6 @@ const Section = styled.section`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 3rem;
   }
 
   .keys-container {
@@ -303,8 +321,13 @@ const Section = styled.section`
   }
 
   .heroImg {
-    width: 100%;
+    width: 70vw;
     height: auto;
+  }
+
+   .card-image {
+    aspect-ratio: 4 / 3;  
+    height: 130px;         
   }
 
   
@@ -314,11 +337,6 @@ const Section = styled.section`
   }
 
   .card {
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    padding: 1px; 
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 30rem;
   }
 
@@ -341,6 +359,11 @@ const Section = styled.section`
     width: 100%;
     height: auto;
     }
+
+    .card-image {
+    aspect-ratio: 1 / 1; 
+    height: 150px;       
+  }
 
     .motto {
       font-size: 18px;
@@ -411,6 +434,7 @@ const Section = styled.section`
     }
     
     .card {
+    width: 25rem;
      
     }
 

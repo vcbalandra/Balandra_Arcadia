@@ -1,25 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-// import './Sidebar.css';  
+import { FaPlus, FaList, FaUser, FaUserShield } from 'react-icons/fa';
+import { SidebarWrapper, Logo, LogoText, SidebarLinks, SidebarLink, SidebarIcon } from '../assets/wrappers/Sidebar'; 
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
-      <div className="logo">
-        <h2>Admin Dashboard</h2>
-      </div>
-      <ul className="sidebar-links">
+    <SidebarWrapper>
+      <Logo>
+        <LogoText>Admin Dashboard</LogoText>
+      </Logo>
+      <SidebarLinks>
         <li>
-          <Link to="/dashboard/add-event" className="sidebar-link">Add Event</Link>
+          <SidebarLink to="/dashboard/add-event">
+            <SidebarIcon>
+              <FaPlus />
+            </SidebarIcon>
+            Add Event
+          </SidebarLink>
         </li>
         <li>
-          <Link to="/dashboard/all-events" className="sidebar-link">Event List</Link>
+          <SidebarLink to="/dashboard/all-events">
+            <SidebarIcon>
+              <FaList />
+            </SidebarIcon>
+            Event List
+          </SidebarLink>
         </li>
         <li>
-          <Link to="/admin" className="sidebar-link">Admin</Link>
+          <SidebarLink to="/dashboard/profile">
+            <SidebarIcon>
+              <FaUser />
+            </SidebarIcon>
+            Profile
+          </SidebarLink>
         </li>
-      </ul>
-    </div>
+        <li>
+          <SidebarLink to="/dashboard/admin">
+            <SidebarIcon>
+              <FaUserShield />
+            </SidebarIcon>
+            Admin
+          </SidebarLink>
+        </li>
+      </SidebarLinks>
+    </SidebarWrapper>
   );
 };
 

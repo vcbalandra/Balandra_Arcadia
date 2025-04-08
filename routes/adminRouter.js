@@ -14,11 +14,11 @@ router.get('/current-user', getCurrentUser);
 router.get('/profile', [
   authorizePermissions('user'),
 ]);
-// router.patch(
-//   '/update-user',
-//   upload.single('avatar'),
-//   validateUpdateUserInput,
-//   updateUser
-// );
+router.patch(
+  '/update-user',
+  upload.single('avatar'),
+  validateUpdateUserInput,
+  updateUser
+);
 
 export default router;

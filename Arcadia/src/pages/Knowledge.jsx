@@ -7,6 +7,17 @@ import Footer from '../components/Footer';
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import heroImage from '../assets/images/hero-img.jpg';
+import stakeholders from '../assets/images/stakeholders.jpg';
+import people from '../assets/images/people.jpg';
+import clients from '../assets/images/clients.jpg';
+import society from '../assets/images/society.jpg';
+import boards from '../assets/images/boards.jpg';
+import agenda from '../assets/images/agenda.jpg';
+import biodiversity from '../assets/images/biodiversity.jpg';
+import regulations from '../assets/images/regulations.jpg';
+import analysis from '../assets/images/analysis.jpg';
+import papers from '../assets/images/papers.jpg';
+import reports from '../assets/images/reports.jpg';
 
 export const loader = async () => {
   try {
@@ -19,24 +30,45 @@ export const loader = async () => {
 };
 
 const Knowledge = () => {
-  const [emblaRef] = useEmblaCarousel({ loop: false,
+  const [editorials, setEditorials] = useState([
+    { id: 1, header: 'For our stakeholders', image: stakeholders, text: 'We run a sustainable and responsible business that manages risks and behaves ethically, support their skills development and career advancement.' },
+    { id: 2, header: 'For our people', image: people, text: 'We provide an inclusive and equitable workplace, promote their safety and well-being, and support their skills development and career advancement.' },
+    { id: 3, header: 'For our clients', image: clients, text: 'We strive to serve our clients with the highest level of quality, integrity, and innovation to help them meet some of their biggest challenges.' },
+    { id: 4, header: 'For society', image: society, text: 'We act in the public interest, to help fight corruption, protect the environment, and provide opportunities and resources for those seeking a better future.' },
+  ]);
+
+  const [waste, setWaste] = useState([
+    { id: 1, header: 'Climate change governance and the board chair of the future', image: boards, text: 'Some chairs are encountering headwinds, while others are driving the climate agenda vigorously. How can chairs and boards help build momentum to meet the sustainability challenge head-on?' },
+    { id: 2, header: 'Climate on the agenda', image: agenda, text: 'Global leaders have met at different gatherings leading up to and throughout 2023, including the United Nations Climate Change Conference (COP28), the United Nations Biodiversity Conference (COP15).' },
+    { id: 3, header: 'Putting nature and biodiversity loss on the business agenda', image: biodiversity, text: 'How protecting nature and introducing nature-positive strategies can lead to innovation, job creation, and improved resilience to future shocks. he United Nations Biodiversity.' },
+    { id: 4, header: 'Sustainability regulations: A gateway to new digital opportunities', image: regulations, text: 'Emergence of region and country-specific regulations and compliance could pose organization-wide challenges for businesses due to their varied scope and timelines.' },
+  ]);
+
+
+  const [emblaRefEditorials] = useEmblaCarousel(
+    {
+      loop: false,
       slidesToScroll: 1,
-      
-      align: 'start', 
-      draggable: true, 
+      align: 'start',
+      draggable: true,
       speed: 6,
-     }, [Autoplay()])
-  
-    const [posts, setPosts] = useState([
-      { id: 1, content: 'Events 1', heroImage },
-      { id: 2, content: 'Events 2', heroImage },
-      { id: 3, content: 'Events 3', heroImage },
-      { id: 4, content: 'Events 4', heroImage },
-    ]);
-  
-  
-    useEffect(() => {
-    }, []);
+    },
+    [Autoplay()] 
+  );
+
+  const [emblaRefWaste] = useEmblaCarousel(
+    {
+      loop: false,
+      slidesToScroll: 1,
+      align: 'start',
+      draggable: true,
+      speed: 6,
+    },
+    [Autoplay()]
+  );
+
+  useEffect(() => {
+  }, []);
 
   return (
     <div>
@@ -59,7 +91,7 @@ const Knowledge = () => {
           </p>
           </div>
           <div className='image-container'>
-            <img src={heroImage} alt="Hero Image" className='marketImg'/>
+            <img src={analysis} alt="Hero Image" className='marketImg'/>
            </div>
           </div>
       </section>
@@ -67,7 +99,7 @@ const Knowledge = () => {
       <section id='position-papers' className='position-papers'>
         <div className="papers-container">
            <div className='image-container'>
-            <img src={heroImage} alt="Hero Image" className='papersImg'/>
+            <img src={papers} alt="Hero Image" className='papersImg'/>
             </div>
           <div className="row">
           <h3 className='papers-title'>POSITION PAPERS</h3>
@@ -94,7 +126,7 @@ const Knowledge = () => {
           </p>
           </div>
           <div className='image-container'>
-            <img src={heroImage} alt="Hero Image" className='reportsImg'/>
+            <img src={reports} alt="Hero Image" className='reportsImg'/>
            </div>
           </div>
       </section>
@@ -102,12 +134,13 @@ const Knowledge = () => {
       <section id='editorials' className='editorials'>
         <div className="editorials-container">
         <h5 className='editorials-title'>Opinion Editorials</h5>
-         <div className="embla" ref={emblaRef}>
+         <div className="embla" ref={emblaRefEditorials}>
             <div className="embla__container">
-              {posts.map((post) => (
-                <div key={post.id} className="embla__slide">
-                  <h2>{post.content}</h2> 
-                  {post.heroImage && <img src={post.heroImage} alt="Hero" className='editorials-img'/>} 
+              {editorials.map((editorials) => (
+                <div key={editorials.id} className="embla__slide">
+                  {editorials.image && <img src={editorials.image} alt="Hero" className='editorials-img'/>} 
+                  <h2 className='editorials-header'>{editorials.header}</h2> 
+                  <p className='editorials-text'>{editorials.text}</p>
                 </div>
               ))}
             </div>
@@ -118,12 +151,13 @@ const Knowledge = () => {
       <section id='waste-reports' className='waste-reports'>
         <div className="waste-container">
           <h6 className='waste-title'>Published Waste Reports</h6>
-          <div className="embla" ref={emblaRef}>
+          <div className="embla" ref={emblaRefWaste}>
             <div className="embla__container">
-              {posts.map((post) => (
-                <div key={post.id} className="embla__slide">
-                  <h2>{post.content}</h2> 
-                  {post.heroImage && <img src={post.heroImage} alt="Hero" className='editorials-img'/>} 
+              {waste.map((waste) => (
+                <div key={waste.id} className="embla__slide">
+                  {waste.image && <img src={waste.image} alt="Hero" className='waste-img'/>}
+                  <h2 className='waste-header'>{waste.header}</h2> 
+                  <p className='waste-text'>{waste.text}</p> 
                 </div>
               ))}
             </div>

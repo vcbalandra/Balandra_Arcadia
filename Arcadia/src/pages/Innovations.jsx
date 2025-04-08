@@ -2,6 +2,9 @@ import React from 'react'
 import { redirect } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Innovations';
 import heroImage from '../assets/images/hero-img.jpg';
+import solutionsImg from '../assets/images/solutions.svg';
+import KnowledgeImg from '../assets/images/knowledge.jpg';
+import eventsImg from '../assets/images/events.svg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Carousel from '../components/Carousel';
@@ -59,21 +62,18 @@ const Innovations = () => {
     </p>
     <div className="card-grid">
       <div className="card">
-      <img src={heroImage} alt="Events" className="card-image" />
-        <h2>Events</h2>
-        <p>This is the first card.</p>
+      <img src={eventsImg} alt="Events" className="card-image" />
+        <h2 className='card-title'>Events</h2>
         <button>Learn more</button>
       </div>
       <div className="card">
-      <img src={heroImage} alt="Events" className="card-image" />
-        <h2>Knowledge Portal</h2>
-        <p>This is the second card.</p>
+      <img src={KnowledgeImg} alt="Knowledge" className="card-image" />
+        <h2 className='card-title'>Knowledge Portal</h2>
         <button>Learn more</button>
       </div>
       <div className="card">
-      <img src={heroImage} alt="Events" className="card-image" />
-        <h2>Innovation & Solutions Exchange</h2>
-        <p>This is the third card.</p>
+      <img src={solutionsImg} alt="Innovation" className="card-image" />
+        <h2 className='card-title'>Innovation & Solutions Exchange</h2>
         <button>Learn more</button>
       </div>
       </div>

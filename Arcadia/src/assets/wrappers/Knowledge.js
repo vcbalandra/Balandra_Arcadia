@@ -204,7 +204,7 @@ const Wrapper = styled.section`
     padding: 0 4rem;
   }
 
-  .editorials-img {
+  .editorials-img, .waste-img {
     margin-top: 1rem;
     margin-left: 2rem;
     height: 20rem;
@@ -242,12 +242,31 @@ const Wrapper = styled.section`
   text-align: center; 
   flex-direction: column;
   color: #000000;
+  text-align: center;
 }
 
 .arcadia-word {
   color: #008080;
   font-size: 30px;
   font-weight: bold;
+}
+
+.editorials-header, .waste-header {
+font-size: 20px;
+font-weight: bold;
+margin-top: 2rem; 
+color: #008080;
+text-align: center;
+max-width: 400px;
+word-wrap: break-word;
+margin-left: 2rem;
+}
+
+.editorials-text, .waste-text {
+font-size 16px;
+text-align: center;
+max-width: 300px;
+margin-left: 2rem;
 }
 
 
@@ -275,7 +294,7 @@ const Wrapper = styled.section`
   .marketImg,
   .papersImg,
   .reportsImg {
-    height: 12rem; 
+    height: 14rem; 
     width: 25rem; 
     margin-bottom: 3rem;
   }

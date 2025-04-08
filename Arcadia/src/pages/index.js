@@ -1,5 +1,6 @@
 export { default as HomeLayout } from './HomeLayout';
 export { default as Events } from './Events';
+export { default as Contact } from './Contact';
 export { default as Knowledge } from './Knowledge';
 export { default as Innovations } from './Innovations';
 export { default as Error } from './Error';
