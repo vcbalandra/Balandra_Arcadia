@@ -54,12 +54,14 @@ const Profile = () => {
 
     if (formData.avatar) {
       data.append('avatar', formData.avatar);
-    } else {
-      console.log('No avatar file selected');
     }
 
     try {
-      const response = await customFetch.patch('/admin/update-user', data);
+      const response = await customFetch.patch('/admin/update-user', data, {  
+        headers: {
+        "Content-Type": "multipart/form-data",
+        }
+      });
 
       if (response.status === 200) {
         localStorage.setItem('profileUpdatedSuccess', 'true');
@@ -82,7 +84,7 @@ const Profile = () => {
   return (
     <Container>
       <Heading>Update Profile</Heading>
-      <Form method="post" onSubmit={handleSubmit}>
+      <Form method="post" onSubmit={handleSubmit} encType="multipart/form-data">
         <FormRow>
           <Label htmlFor="name">First Name</Label>
           <Input

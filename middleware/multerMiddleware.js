@@ -11,8 +11,25 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({
+const storageMemory = multer.memoryStorage();
+
+export const upload = multer({
     storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 },  
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpg|jpeg|png|gif/;
+        const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = fileTypes.test(file.mimetype);
+
+        if (extname && mimetype) {
+            return cb(null, true);
+        }
+        cb(new Error('Only image files are allowed.'));
+    }
+});
+
+export const uploadMemory = multer({
+    storage: storageMemory,
     limits: { fileSize: 5 * 1024 * 1024 }, 
     fileFilter: (req, file, cb) => {
         const fileTypes = /jpg|jpeg|png|gif/;
@@ -27,10 +44,7 @@ const upload = multer({
 });
 
 const parser = new DataParser();
-
 export const formatImage = (file) => {
     const fileExtension = path.extname(file.originalname).toString();
     return parser.format(fileExtension, file.buffer).content;
-  };
-
-export default upload;
+};

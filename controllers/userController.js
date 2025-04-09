@@ -20,31 +20,16 @@ export const updateUser = async (req, res) => {
   delete newUser.role;
 
   if (req.file) {
-    try {
-      if (!req.file.buffer) {
-        return res.status(400).json({ msg: 'File data is missing or invalid' });
-      }
+    const file = formatImage(req.file);
+    const response = await cloudinary.v2.uploader.upload(file);
+    newUser.avatar = response.secure_url;
+    newUser.avatarPublicId = response.public_id;
+  }
+  const updatedUser = await User.findByIdAndUpdate(req.user.userId, newUser);
 
-      const file = formatImage(req.file); 
-
-      const response = await cloudinary.v2.uploader.upload(file);
-      newUser.avatar = response.secure_url;
-      newUser.avatarPublicId = response.public_id;
-
-      if (req.user.avatarPublicId) {
-        await cloudinary.v2.uploader.destroy(req.user.avatarPublicId);
-      }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      return res.status(500).json({ msg: 'Error uploading image to Cloudinary' });
-    }
+  if (req.file && updatedUser.avatarPublicId) {
+    await cloudinary.v2.uploader.destroy(updatedUser.avatarPublicId);
   }
 
-  const updatedUser = await User.findByIdAndUpdate(req.user.userId, newUser, { new: true });
-
-  if (!updatedUser) {
-    return res.status(404).json({ msg: 'User not found' });
-  }
-
-  res.status(200).json({ msg: 'User updated successfully', updatedUser });
+  res.status(StatusCodes.OK).json({ msg: 'update user' });
 };

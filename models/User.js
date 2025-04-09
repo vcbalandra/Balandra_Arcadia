@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 
 // User Schema
 const UserSchema = new mongoose.Schema(
@@ -37,7 +36,6 @@ const UserSchema = new mongoose.Schema(
 );
 
 
-// Remove password from the response object
 UserSchema.methods.toJSON = function () {
   let obj = this.toObject();
   delete obj.password;
