@@ -1,19 +1,19 @@
 import multer from 'multer';
+import DataParser from 'datauri/parser.js';
 import path from 'path';
 
-// Specify storage and file naming rules
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');  
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Ensure a unique filename is generated
+        cb(null, Date.now() + path.extname(file.originalname)); 
     },
 });
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // Optional: limit file size to 5MB
+    limits: { fileSize: 5 * 1024 * 1024 }, 
     fileFilter: (req, file, cb) => {
         const fileTypes = /jpg|jpeg|png|gif/;
         const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
@@ -25,5 +25,12 @@ const upload = multer({
         cb(new Error('Only image files are allowed.'));
     }
 });
+
+const parser = new DataParser();
+
+export const formatImage = (file) => {
+    const fileExtension = path.extname(file.originalname).toString();
+    return parser.format(fileExtension, file.buffer).content;
+  };
 
 export default upload;

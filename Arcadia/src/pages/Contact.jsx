@@ -85,7 +85,7 @@ const Contact = () => {
 
         <div className='informations'>
           <p className='additional'>Additional questions? Submit our form</p>
-          <p className='additional-text'>How can e help?</p>
+          <p className='additional-text'>How can we help?</p>
           <p className='additional-text'>Please submit your question here and we will respond as quickly as possible.</p>
           <p className='additional-text'>If your query relates to <i>Privacy,</i> please refer to the information and contract details listed in our
           Privacy Notice.</p>

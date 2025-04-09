@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDashboardContext } from '../pages/DashboardLayout'; 
+import { useDashboardContext } from '../pages/DashboardLayout';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
+import { Container, Heading, Form, FormRow, Label, Input, FileInput, AvatarPreview, SubmitButton, LoadingText } from '../assets/wrappers/Profile';
 
 const Profile = () => {
   const navigate = useNavigate();
-
   const { user } = useDashboardContext();
 
   const [formData, setFormData] = useState({
@@ -18,13 +18,18 @@ const Profile = () => {
   });
 
   useEffect(() => {
+    if (localStorage.getItem('profileUpdatedSuccess')) {
+      toast.success('Profile updated successfully');
+      localStorage.removeItem('profileUpdatedSuccess'); 
+    }
+
     if (user) {
       setFormData({
         name: user.name || '',
         lastName: user.lastName || '',
         email: user.email || '',
         location: user.location || '',
-        avatar: user.avatar || null, 
+        avatar: user.avatar || null,
       });
     }
   }, [user]);
@@ -49,13 +54,18 @@ const Profile = () => {
 
     if (formData.avatar) {
       data.append('avatar', formData.avatar);
+    } else {
+      console.log('No avatar file selected');
     }
 
     try {
       const response = await customFetch.patch('/admin/update-user', data);
-      if (response.data.success) {
+
+      if (response.status === 200) {
+        localStorage.setItem('profileUpdatedSuccess', 'true');
         toast.success('Profile updated successfully');
-        navigate('/dashboard');
+        navigate('/dashboard/profile');
+        window.location.reload();
       } else {
         toast.error('Failed to update profile');
       }
@@ -66,16 +76,16 @@ const Profile = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <LoadingText>Loading...</LoadingText>;
   }
 
   return (
-    <div>
-      <h2>Update Profile</h2>
-      <form method="post" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">First Name</label>
-          <input
+    <Container>
+      <Heading>Update Profile</Heading>
+      <Form method="post" onSubmit={handleSubmit}>
+        <FormRow>
+          <Label htmlFor="name">First Name</Label>
+          <Input
             type="text"
             id="name"
             name="name"
@@ -83,11 +93,11 @@ const Profile = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </FormRow>
 
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
+        <FormRow>
+          <Label htmlFor="lastName">Last Name</Label>
+          <Input
             type="text"
             id="lastName"
             name="lastName"
@@ -95,11 +105,11 @@ const Profile = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </FormRow>
 
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
+        <FormRow>
+          <Label htmlFor="email">Email</Label>
+          <Input
             type="email"
             id="email"
             name="email"
@@ -107,11 +117,11 @@ const Profile = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </FormRow>
 
-        <div>
-          <label htmlFor="location">Location</label>
-          <input
+        <FormRow>
+          <Label htmlFor="location">Location</Label>
+          <Input
             type="text"
             id="location"
             name="location"
@@ -119,37 +129,27 @@ const Profile = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </FormRow>
 
-        <div>
-          <label htmlFor="avatar">Avatar</label>
-          <input
+        <FormRow>
+          <Label htmlFor="avatar">Profile Picture</Label>
+          <FileInput
             type="file"
             id="avatar"
             name="avatar"
             onChange={handleChange}
             accept="image/*"
           />
-          {formData.avatar && typeof formData.avatar === 'string' ? (
-            <img
-              src={formData.avatar}
-              alt="Avatar preview"
-              style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-            />
+          {formData.avatar && (typeof formData.avatar === 'string' ? (
+            <AvatarPreview src={formData.avatar} alt="Avatar preview" />
           ) : (
-            formData.avatar && (
-              <img
-                src={URL.createObjectURL(formData.avatar)}
-                alt="Avatar preview"
-                style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-              />
-            )
-          )}
-        </div>
+            <AvatarPreview src={URL.createObjectURL(formData.avatar)} alt="Avatar preview" />
+          ))}
+        </FormRow>
 
-        <button type="submit">Update Profile</button>
-      </form>
-    </div>
+        <SubmitButton type="submit">Update Profile</SubmitButton>
+      </Form>
+    </Container>
   );
 };
 
