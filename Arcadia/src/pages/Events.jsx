@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import customFetch from '../utils/customFetch';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import heroImage from '../assets/images/hero-img.jpg';
 import { Modal, Button } from 'react-bootstrap'; 
 import dialogues from '../assets/images/dialogues.jpg';
 import hackathon from '../assets/images/hackathon.jpg';
@@ -51,6 +50,7 @@ const Events = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [countdown, setCountdown] = useState({});
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -76,9 +76,30 @@ const Events = () => {
     fetchEvents();
   }, []);
 
+  const calculateCountdown = (eventDate) => {
+    const eventTime = new Date(eventDate).getTime();
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventTime - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  
+      setCountdown((prev) => ({
+        ...prev,
+        [eventDate]: { days },
+      }));
+    }, 1000);
+  };
+
   const handleViewEvent = (event) => {
     setSelectedEvent(event);
     setShowModal(true); 
+    calculateCountdown(event.eventDate);
   };
 
   const handleCloseModal = () => {
@@ -175,19 +196,26 @@ const Events = () => {
             <Modal.Title>{selectedEvent?.eventTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>{selectedEvent?.eventDescription}</p>
-            {selectedEvent && (
-            new Date(selectedEvent.eventDate) >= new Date() ? (
-              <Button variant="success" href={selectedEvent.registrationLink} target="_blank">
-                Register
-              </Button>
-            ) : (
-              <Button variant="secondary" disabled>
-                Event Closed
-              </Button>
-            )
-          )}
-          </Modal.Body>
+  <p>{selectedEvent?.eventDescription}</p>
+  {selectedEvent && new Date(selectedEvent.eventDate) >= new Date() ? (
+    <>
+      <Button variant="success" href={selectedEvent.registrationLink} target="_blank">
+        Register
+      </Button>
+      <div className="countdown">
+        {countdown[selectedEvent.eventDate] && (
+          <p className='days-left'>
+         Closing in {countdown[selectedEvent.eventDate].days} day/s
+          </p>
+        )}
+            </div>
+          </>
+        ) : (
+          <Button variant="secondary" disabled>
+            Event Closed
+          </Button>
+        )}
+      </Modal.Body>
         </Modal>
 
         <Footer />

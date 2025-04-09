@@ -61,7 +61,7 @@ export const SubmitButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: rgb(65, 142, 67);
+    background-color: rgb(46, 105, 49);
   }
 `;
 
