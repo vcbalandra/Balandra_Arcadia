@@ -18,32 +18,32 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find user by email
     const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ msg: 'Email is invalid.' });
     }
 
-    // Compare the provided password with the stored hashed password
     const isValidUser =
     user && (await comparePassword(req.body.password, user.password));
 
   if (!isValidUser) {
     return res.status(StatusCodes.UNAUTHORIZED).json({ msg: 'Password is incorrect.' });
   } 
-    // Generate JWT token
+
+  if (user.role !== 'admin') {
+    return res.status(StatusCodes.FORBIDDEN).json({ msg: 'You are not authorized yet. Please wait for email confirmation.' });
+  }
+
     const token = createJWT({ userId: user._id, role: user.role });
     const oneDay = 1000 * 60 * 60 * 24;
 
-    // Set the token as a cookie in the response
     res.cookie('token', token, {
       httpOnly: true,
       expires: new Date(Date.now() + oneDay),
-      secure: process.env.NODE_ENV === 'production', // Secure cookies for production
+      secure: process.env.NODE_ENV === 'production',
     });
 
-    // Send success response with message
     res.status(StatusCodes.OK).json({ msg: 'User logged in' });
 
   } catch (error) {

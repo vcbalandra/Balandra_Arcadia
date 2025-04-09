@@ -5,10 +5,7 @@ import {
   validateLoginInput,
 } from '../middleware/validationMiddleware.js';
 import rateLimiter from 'express-rate-limit';
-import { createJWT } from '../utils/tokenUtils.js';
-import User from '../models/User.js';
-import { StatusCodes } from 'http-status-codes';
-import { comparePassword } from '../utils/passwordUtils.js';
+
 
 const router = express.Router();
 
