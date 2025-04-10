@@ -81,17 +81,25 @@ const Events = () => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = eventTime - now;
-
+  
       if (distance < 0) {
         clearInterval(interval);
         return;
       }
-
+  
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+      let countdownValue;
+      if (days > 0) {
+        countdownValue = `${days} days`;
+      } else {
+        countdownValue = `${hours} hours`;
+      }
   
       setCountdown((prev) => ({
         ...prev,
-        [eventDate]: { days },
+        [eventDate]: { countdownValue },
       }));
     }, 1000);
   };
@@ -205,7 +213,7 @@ const Events = () => {
       <div className="countdown">
         {countdown[selectedEvent.eventDate] && (
           <p className='days-left'>
-         Closing in {countdown[selectedEvent.eventDate].days} day/s
+         Closing in {countdown[selectedEvent.eventDate].countdownValue}
           </p>
         )}
             </div>

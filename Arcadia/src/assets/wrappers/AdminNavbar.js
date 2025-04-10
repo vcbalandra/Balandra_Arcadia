@@ -7,15 +7,15 @@ const Wrapper = styled.nav`
   justify-content: center;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   background: var(--background-secondary-color);
-  width: 90vw;
+  width: 100vw;
 
   .nav-center {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    margin-right: 6rem;
   }
+
   .toggle-btn {
     background: transparent;
     border-color: transparent;
@@ -37,6 +37,7 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
   }
+    
   @media (min-width: 992px) {
     position: sticky;
     top: 0;
@@ -50,5 +51,9 @@ const Wrapper = styled.nav`
       display: block;
     }
   }
+
+   @media (min-width: 480px) {
+      width: 100vw;
+}
 `;
 export default Wrapper;

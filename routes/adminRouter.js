@@ -7,7 +7,7 @@ import { validateUpdateUserInput } from '../middleware/validationMiddleware.js';
 import {
   authorizePermissions 
 } from '../middleware/authMiddleware.js';
-import { upload, uploadMemory } from '../middleware/multerMiddleware.js';
+import { uploadMemory } from '../middleware/multerMiddleware.js';
 const router = Router();
 
 router.get('/current-user', getCurrentUser);

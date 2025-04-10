@@ -8,6 +8,14 @@ const StyledCardImg = styled(Card.Img)`
   width: 100%;
   height: 40vh;
   object-fit: cover;
+}
+   @media (min-width: 769px) {
+    width: 100vw; 
+  }
+
+    @media (max-width: 480px) {
+    width: 100vw;
+  }
 `;
 
 export default StyledCardImg;

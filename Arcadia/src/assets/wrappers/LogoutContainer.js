@@ -8,7 +8,8 @@ const Wrapper = styled.div`
     height: 25px;
     border-radius: 50%;
   }
-    .logout-container {
+
+  .logout-container {
   position: relative;
   display: inline-block;
 }
@@ -19,12 +20,13 @@ const Wrapper = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 24px;
+  gap: 6px;
+  font-size: 16px;
   color: #333;
 }
 
 .logout-btn:hover {
-  color: #007bff;
+  color: #008080;
 }
 
 .dropdown {

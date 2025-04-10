@@ -6,6 +6,7 @@ import { authenticateUser } from '../middleware/authMiddleware.js';
 import  { getEvents }  from '../controllers/eventController.js'; 
 
 const router = express.Router();
+const fs = require('fs');
 
 
 const storage = multer.diskStorage({
@@ -78,7 +79,17 @@ router.put('/update-event/:eventId', authenticateUser, upload.single('eventImage
     }
 
     let eventImage = event.eventImage;
+
     if (req.file) {
+      if (eventImage) {
+        fs.unlink(path.join(__dirname, '..', eventImage), (err) => {
+          if (err) {
+            console.error('Error deleting old image:', err);
+          } else {
+            console.log('Old image deleted successfully');
+          }
+        });
+      }
       eventImage = req.file.path;
     }
 
@@ -98,7 +109,7 @@ router.put('/update-event/:eventId', authenticateUser, upload.single('eventImage
       event,
     });
   } catch (error) {
-    console.error("Error updating event:", error);
+    console.error('Error updating event:', error);
     return res.status(500).json({
       success: false,
       message: 'Failed to update event',
