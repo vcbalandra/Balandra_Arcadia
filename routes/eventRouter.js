@@ -7,7 +7,7 @@ import { authenticateUser } from '../middleware/authMiddleware.js';
 import  { getEvents }  from '../controllers/eventController.js'; 
 
 const router = express.Router();
-
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
