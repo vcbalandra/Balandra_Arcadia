@@ -1,12 +1,12 @@
 import express from 'express';
 import multer from 'multer';
+import fs from 'fs';
 import path from 'path';
 import Event from '../models/Event.js'; 
 import { authenticateUser } from '../middleware/authMiddleware.js'; 
 import  { getEvents }  from '../controllers/eventController.js'; 
 
 const router = express.Router();
-const fs = require('fs');
 
 
 const storage = multer.diskStorage({
