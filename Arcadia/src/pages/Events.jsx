@@ -200,31 +200,31 @@ const Events = () => {
         </section>
 
         <Modal show={showModal} onHide={handleCloseModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>{selectedEvent?.eventTitle}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-  <p>{selectedEvent?.eventDescription}</p>
-  {selectedEvent && new Date(selectedEvent.eventDate) >= new Date() ? (
-    <>
-      <Button variant="success" href={selectedEvent.registrationLink} target="_blank">
-        Register
-      </Button>
-      <div className="countdown">
-        {countdown[selectedEvent.eventDate] && (
-          <p className='days-left'>
-         Closing in {countdown[selectedEvent.eventDate].countdownValue}
-          </p>
-        )}
-            </div>
-          </>
-        ) : (
-          <Button variant="secondary" disabled>
-            Event Closed
+  <Modal.Header closeButton>
+    <Modal.Title>{selectedEvent?.eventTitle}</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <p>{selectedEvent?.eventDescription}</p>
+    {selectedEvent && new Date(selectedEvent.eventDate) >= new Date() ? (
+      <>
+        <div className="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+          <Button variant="success" href={selectedEvent.registrationLink} target="_blank">
+            Register event
           </Button>
-        )}
-      </Modal.Body>
-        </Modal>
+          {countdown[selectedEvent.eventDate] && (
+            <p className='days-left mb-0 text-danger'>
+              Registration will close in {countdown[selectedEvent.eventDate].countdownValue}
+            </p>
+          )}
+        </div>
+      </>
+    ) : (
+      <Button variant="secondary" disabled>
+        Event Closed
+      </Button>
+    )}
+  </Modal.Body>
+</Modal>
 
         <Footer />
       </Wrapper>

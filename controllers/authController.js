@@ -31,7 +31,7 @@ export const login = async (req, res) => {
     return res.status(StatusCodes.UNAUTHORIZED).json({ msg: 'Password is incorrect.' });
   } 
 
-  if (user.role !== 'admin') {
+  if (user.role !== 'admin' && user.role !== 'superAdmin') {
     return res.status(StatusCodes.FORBIDDEN).json({ msg: 'You are not authorized yet. Please wait for email confirmation.' });
   }
 

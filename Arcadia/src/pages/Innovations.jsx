@@ -13,7 +13,7 @@ import Carousel from '../components/Carousel';
 
 export const loader = async () => {
   try {
-    const response = await fetch('/innovation-solutions-exchange');
+    const response = await fetch('/company');
     return response.data;
   } catch (error) {
    alert(error);
@@ -64,17 +64,23 @@ const Innovations = () => {
       <div className="card">
       <img src={eventsImg} alt="Events" className="card-image" />
         <h2 className='card-title'>Events</h2>
+        <a href="/events-collaboration">
         <button>Learn more</button>
+        </a>
       </div>
       <div className="card">
       <img src={KnowledgeImg} alt="Knowledge" className="card-image" />
         <h2 className='card-title'>Knowledge Portal</h2>
+        <a href="/publications">
         <button>Learn more</button>
+        </a>
       </div>
       <div className="card">
       <img src={solutionsImg} alt="Innovation" className="card-image" />
         <h2 className='card-title'>Innovation & Solutions Exchange</h2>
+        <a href="initiatives">
         <button>Learn more</button>
+        </a>
       </div>
       </div>
     </div>

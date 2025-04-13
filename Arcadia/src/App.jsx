@@ -21,16 +21,20 @@ import {
   AddEvent,
   AllEvents,
   Contact,
+  Initiatives,
+  AddPartners,
+  AllPartners,
 } from './pages';
 
 import { loader as allEventsLoader } from './pages/AllEvents';
+import { loader as allPartnersLoader } from './pages/AllPartners';
 import { loader as contactLoader } from './pages/Contact';
 import { loader as eventsLoader } from './pages/Events';
 import { loader as knowledgeLoader } from './pages/Knowledge';
 import { loader as innovationsLoader } from './pages/Innovations';
+import { loader as initiativesLoader } from './pages/Initiatives';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
 // import { action as profileAction } from './pages/Profile';
-import { loader as adminLoader } from './pages/Admin';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 // import PrivateRoute from './components/PrivateRoute';
@@ -84,6 +88,16 @@ const App = () => {
               errorElement: <Error />,
             },
             {
+              path: 'add-partners',
+              element: <AddPartners />,
+            },
+            {
+              path: 'all-partners',
+              element: <AllPartners />,
+              loader: allPartnersLoader,
+              errorElement: <Error />,
+            },
+            {
               path: 'profile',
               element: <Profile />,
               // action: profileAction,
@@ -91,7 +105,6 @@ const App = () => {
             {
               path: 'admin',
               element: <Admin />,
-              loader: adminLoader,
             },
           ],
         },
@@ -101,12 +114,12 @@ const App = () => {
           loader: eventsLoader,
         },
         {
-          path: '/knowledge-hub',
+          path: '/publications',
           element: <Knowledge/>,
           loader: knowledgeLoader,
         },
         {
-          path: '/innovation-solutions-exchange',
+          path: '/company',
           element: <Innovations />,
           loader: innovationsLoader,
         },
@@ -115,15 +128,22 @@ const App = () => {
           element: <Contact />,
           loader: contactLoader,
         },
+        {
+          path: '/initiatives',
+          element: <Initiatives />,
+          loader: initiativesLoader,
+        },
       ],
     },
   ]);
 
   return (
+    <AuthProvider>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+    </AuthProvider>
   );
 };
 

@@ -26,23 +26,28 @@ const Navbar = () => {
 
         <ul className={`nav-links ${isMobileMenuOpen ? 'mobile' : ''}`}>
           <li>
-          <a href="/innovation-solutions-exchange" className="nav-item">
-              Innovation & Solutions Exchange
+          <a href="/company" className="nav-item">
+             Who We Are
             </a>
           </li>
           <li>
           <a href="/events-collaboration" className="nav-item">
-              Events & Collaborations
+              Events
             </a>
           </li>
           <li>
-            <a href="/knowledge-hub" className="nav-item">
-              Knowledge Hub
+            <a href="/publications" className="nav-item">
+              Publications
+            </a>
+          </li>
+          <li>
+            <a href="/initiatives" className="nav-item">
+              Initiatives
             </a>
           </li>
           <li>
           <a href="/contact" className="nav-item">
-              Contact
+             Work With Us
             </a>
           </li>
         </ul>

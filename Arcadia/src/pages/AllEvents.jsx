@@ -114,7 +114,18 @@ const AllEvents = () => {
               <tr key={event._id}>
                 <td>{index + 1 + (currentPage - 1) * eventsPerPage}</td>
                 <td>{event.eventTitle}</td>
-                <td>{event.eventDescription}</td>
+                <td
+                style={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  maxWidth: '200px',
+                  cursor: 'pointer'
+                }}
+                title={event.eventDescription} 
+              >
+                {event.eventDescription}
+              </td>
                 <td>{formatDate(event.eventDate)}</td>
                 <td>
                   <span className={statusClass} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>

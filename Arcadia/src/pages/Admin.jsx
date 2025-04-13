@@ -1,21 +1,30 @@
-import React from 'react'
-import { redirect } from 'react-router-dom';
-import customFetch from '../utils/customFetch';
-
-export const loader = async () => {
-    try {
-      const response = await customFetch.get('/admin');
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return redirect('/dashboard');
-    }
-  };
+import React, { useEffect, useState } from 'react';
+import { useDashboardContext } from '../pages/DashboardLayout';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'; 
 
 const Admin = () => {
+  const { user } = useDashboardContext();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    if (!user || user.role !== 'superAdmin') {
+      toast.error('You don\'t have access to this page.');
+      navigate('/dashboard'); 
+    } else {
+      setLoading(false); 
+    }
+  }, [user, navigate]);
+
+  if (loading) return null; 
+
   return (
-    <div>Admin</div>
-  )
-}
+    <div>
+      <h1>Super Admin Panel</h1>
+      <p>Welcome, {user?.name || 'Super Admin'}!</p>
+    </div>
+  );
+};
 
 export default Admin;

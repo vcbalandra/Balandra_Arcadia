@@ -167,11 +167,13 @@ const AddEvent = () => {
   };
 
   return (
-    <div className="container">
+      <div className="container">
       <Button variant="success" onClick={() => { setIsEditing(false); setShowModal(true); }}>
         Add Event
       </Button>
-
+      <div className="total-events" style={{ marginTop: '2rem' }}>
+        <h4>Total Events: {events.length}</h4>
+      </div>
       <Modal show={showModal} onHide={resetForm}>
         <Modal.Header closeButton>
           <Modal.Title>{isEditing ? "Edit Event" : "Create New Event"}</Modal.Title>

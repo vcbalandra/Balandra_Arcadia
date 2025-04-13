@@ -1,8 +1,12 @@
 import React from 'react';
-import { FaPlus, FaList, FaUser, FaUserShield } from 'react-icons/fa';
-import { SidebarWrapper, Logo, LogoText, SidebarLinks, SidebarLink, SidebarIcon } from '../assets/wrappers/Sidebar'; 
+import { FaPlus, FaList, FaUser, FaUserShield, FaUsers, FaAddressBook  } from 'react-icons/fa';
+import { SidebarWrapper, Logo, LogoText, SidebarLinks, SidebarLink, SidebarIcon } from '../assets/wrappers/Sidebar';
+import { useDashboardContext } from '../pages/DashboardLayout';
 
 const Sidebar = () => {
+
+  const { user } = useDashboardContext();
+
   return (
     <SidebarWrapper>
       <Logo>
@@ -26,6 +30,22 @@ const Sidebar = () => {
           </SidebarLink>
         </li>
         <li>
+          <SidebarLink to="/dashboard/add-partners">
+            <SidebarIcon>
+              <FaUsers />
+            </SidebarIcon>
+            Add Partners
+          </SidebarLink>
+        </li>
+        <li>
+          <SidebarLink to="/dashboard/all-partners">
+            <SidebarIcon>
+              <FaAddressBook />
+            </SidebarIcon>
+            Partners List
+          </SidebarLink>
+        </li>
+        <li>
           <SidebarLink to="/dashboard/profile">
             <SidebarIcon>
               <FaUser />
@@ -33,14 +53,16 @@ const Sidebar = () => {
             Profile
           </SidebarLink>
         </li>
-        <li>
-          <SidebarLink to="/dashboard/admin">
-            <SidebarIcon>
-              <FaUserShield />
-            </SidebarIcon>
-            Admin
-          </SidebarLink>
-        </li>
+        {user?.role === 'superAdmin' && (
+          <li>
+            <SidebarLink to="/dashboard/admin">
+              <SidebarIcon>
+                <FaUserShield />
+              </SidebarIcon>
+              Manage Users
+            </SidebarLink>
+          </li>
+        )}
       </SidebarLinks>
     </SidebarWrapper>
   );

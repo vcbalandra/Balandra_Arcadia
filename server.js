@@ -14,6 +14,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 import authRouter from './routes/auth.js';
 import adminRouter from './routes/adminRouter.js';
 import eventRouter from './routes/eventRouter.js';
+import partnerRouter from './routes/partnerRouter.js';
 
 // middleware
 import { authenticateUser } from './middleware/authMiddleware.js';
@@ -63,6 +64,7 @@ app.get('/', (req, res) => {
 app.use('/admin', authenticateUser, adminRouter);
 app.use('/auth', authRouter); 
 app.use('/event', eventRouter); 
+app.use('/partner', partnerRouter); 
 
 // Handle 404
 app.use('*', (req, res) => {
