@@ -26,7 +26,7 @@ import {
   AllPartners,
 } from './pages';
 
-import { loader as allEventsLoader } from './pages/AllEvents';
+// import { loader as allEventsLoader } from './pages/AllEvents';
 import { loader as allPartnersLoader } from './pages/AllPartners';
 import { loader as contactLoader } from './pages/Contact';
 import { loader as eventsLoader } from './pages/Events';
@@ -84,7 +84,7 @@ const App = () => {
             {
               path: 'all-events',
               element: <AllEvents />,
-              loader: allEventsLoader,
+              // loader: allEventsLoader,
               errorElement: <Error />,
             },
             {

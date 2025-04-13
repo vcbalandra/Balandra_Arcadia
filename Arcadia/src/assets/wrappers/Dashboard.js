@@ -83,62 +83,60 @@ const Wrapper = styled.div`
     width: 30rem;
     margin-left: 25rem;
     margin-top: 20px;
-    /* Use max-width to ensure it doesn't overflow on small screens */
     max-width: 100%;
   }
 
-  /* Responsive design for smaller screens */
   @media (max-width: 768px) {
     .sidebar {
-      width: 200px;  /* Reduce sidebar width */
+      width: 200px;  
     }
 
     .form-control {
-      width: 90%;  /* Take up most of the screen width */
-      margin-left: 5%;  /* Center the form */
+      width: 90%; 
+      margin-left: 5%; 
     }
 
     .dashboard-container {
-      flex-direction: column;  /* Stack sidebar and content vertically */
+      flex-direction: column;  
     }
 
     .tabs {
-      flex-direction: column;  /* Stack tabs vertically on small screens */
+      flex-direction: column;  
     }
 
     .tab-btn {
       margin-right: 0;
-      width: 100%;  /* Make buttons take full width */
+      width: 100%;  
     }
 
     .sidebar .sidebar-link {
-      font-size: 16px;  /* Reduce font size on smaller screens */
+      font-size: 16px; 
     }
   }
 
   @media (max-width: 480px) {
     .sidebar {
-      width: 100%;  /* Sidebar takes full width */
-      height: auto;  /* Sidebar height adjusts */
+      width: 100%;  
+      height: auto;  
       padding-top: 10px;
     }
 
     .form-control {
-      width: 100%;  /* Form field takes full width */
-      margin-left: 0;  /* No margin left */
+      width: 100%;  
+      margin-left: 0;  
     }
 
     .tabs {
-      display: block;  /* Stack the tabs vertically */
+      display: block;  
     }
 
     .tab-btn {
-      width: 100%;  /* Make each tab button take full width */
-      margin-bottom: 10px;  /* Space between buttons */
+      width: 100%;  
+      margin-bottom: 10px;  
     }
 
     .sidebar .sidebar-link {
-      font-size: 14px;  /* Further reduce font size */
+      font-size: 14px; 
     }
   }
   `;

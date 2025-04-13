@@ -7,15 +7,15 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString(undefined, options);
 };
 
-export const loader = async () => {
-  try {
-    const response = await customFetch.get('/event/all-events');
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to load events');
-  }
-};
+// export const loader = async () => {
+//   try {
+//     const response = await customFetch.get('/event/all-events');
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error('Failed to load events');
+//   }
+// };
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
