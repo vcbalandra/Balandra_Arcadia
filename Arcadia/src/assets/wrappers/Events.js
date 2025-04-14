@@ -282,6 +282,7 @@ const Wrapper = styled.section`
     .dialogues-title,
     .campaigns-title {
       font-size: 28px;
+       margin-top: 3rem;
     }
 
     .upcoming-title {
