@@ -3,30 +3,27 @@ import arcadiaBcg from '../images/background.jpg';
 
 const Section = styled.section`
   color: white;
-  height: 100vh;
-  width: 100%;
+  width: 100vw;
   box-sizing: border-box;
 
   .section-hero {
     background-image: url(${arcadiaBcg});
-    background-size: cover; 
-    background-position: center center; 
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 100%;
+    min-height: 100vh;
+    padding: 2rem 1rem;
   }
 
   .section-hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(40, 60, 70, 0.4); 
+    inset: 0;
+    background-color: rgba(40, 60, 70, 0.4);
     z-index: 1;
   }
 
@@ -37,98 +34,97 @@ const Section = styled.section`
 
   .container {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
   }
 
   .motto {
-    font-size: 30px;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
     font-weight: bold;
     color: #008080;
   }
 
   .hero-message {
-    font-size: 20px;
-    line-height: 2rem;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
     max-width: 600px;
-    word-wrap: break-word;
     margin-bottom: 20px;
+    color: #fff;
   }
 
   .hero-button {
     margin-top: 2rem;
     background-color: #008080;
     color: #fff;
-    cursor: pointer;
     border: none;
     border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
 
   .hero-button:hover {
     background-color: rgb(9, 161, 161);
-    cursor: pointer;
   }
 
   .image-container {
-    margin-right: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin: 2rem 0;
   }
 
   .heroImg {
-    margin-top: 1rem;
-    margin-left: 2rem;
-    height: 20rem;
-    width: 40rem;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    height: 40vh;
+    max-width: 600px;
     object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .card-image {
-  width: 100%;
-  aspect-ratio: 16 / 9; 
-  object-fit: cover; 
-}
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0 0 2px 2px;
+  }
 
   .growing,
   .keys,
   .focus,
   .about {
     background-color: #e6fcf5;
-    margin: 0 auto;
+    width: 100%;
+    padding: 4rem 1rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 0 1rem;
   }
 
   .growing-container {
-    display: flex;
-    flex-direction: row;
-    margin-left: 3rem;
-  }
-  
-  .keys-container {
-    display: flex;
-    margin-bottom: 3rem;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   text-align: left;
+   margin-left: 3rem;
   }
 
+  .keys-container,
   .focus-container,
   .about-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 1200px;
+    width: 100%;
     text-align: center;
   }
 
@@ -136,311 +132,158 @@ const Section = styled.section`
   .keys-header,
   .focus-header,
   .about-header {
-    font-size: 40px;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: bold;
     color: #37b24d;
     margin-bottom: 1rem;
   }
 
-  .focus-header {
-    margin-top: 10rem;
-  }
-
   .growing-message,
   .keys-message,
   .focus-message,
   .about-message,
   .about-hub {
-    font-size: 20px;
-    max-width: 600px;
-    word-wrap: break-word;
-    margin-bottom: 20px;
-    color: #000000;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    max-width: 700px;
+    color: #000;
+    margin-bottom: 1.5rem;
   }
 
   .card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* 3 columns */
-  gap: 20px; /* Space between cards */
-  padding: 20px;
-}
-
-.card {
-  background-color: #fff; /* A cleaner white background for a modern look */
-  border: 1px solid #ddd; /* Light border for subtle separation */
-  padding: 20px;
-  border-radius: 12px; /* Slightly rounded corners for modern aesthetics */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Ensures content is spread out well */
-  height: 100%;
-}
-
-.card-title {
-  margin-top: 1rem;
-}
-
-.card h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 1em;
-  color: #555;
-}
-
-.arcadia-word {
-  color: #008080;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-
-  @media (max-width: 1024px) {
-    .heroImg {
-      height: 15rem;
-      width: 30rem;
-    }
-
-      .card-image {
-    height: auto;  
-  }
-
-    .container {
-      padding: 1rem;
-    }
-
-    .motto {
-      font-size: 26px;
-    }
-
-    .hero-message {
-      font-size: 18px;
-    }
-
-    .hero-button {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
-
-    .growing-header {
-      font-size: 36px;
-    }
-
-    .growing-message {
-      font-size: 18px;
-    }
-
-    .growing-container {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .image-container {
-      margin-left: 0;
-      margin-top: 2rem;
-    }
-
-    .keys-container {
-      margin-top: 10rem;
-    }
-
-    .keys-header {
-      font-size: 32px;
-    }
-
-    .keys-message {
-      font-size: 16px;
-      max-width: 80%;
-    }
-
-  }
-
-  @media (max-width: 768px) {
-  .growing-container,
-  .focus-container,
-  .about-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .keys-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20rem;
-  }
-
-  .growing-container {
-    margin-left: 0;
-  }
-
-  .focus-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .growing, .keys, .focus, .about {
-    width: 100vw;
-    padding: 3rem 1rem;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .growing-header {
-    font-size: 28px;
-  }
-
-  .keys-header {
-    font-size: 28px;
-    margin-top: 30rem;
-  }
-  .focus-header {
-    font-size: 28px;
-    margin-top: 40rem;
-  }
-  .about-header {
-    font-size: 28px;
-    margin-top: 15rem;
-  }
-
-  .growing-message,
-  .keys-message,
-  .focus-message,
-  .about-message,
-  .about-hub {
-    font-size: 16px;
-    max-width: 90%;
-    margin: 0 auto;
-  }
-
-  .heroImg {
-    width: 70vw;
-    height: auto;
-  }
-
-   .card-image {
-    aspect-ratio: 4 / 3;  
-    height: 130px;         
-  }
-
-  
-  .card-grid {
-    grid-template-columns: 1fr; 
-    gap: 1rem; 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Always 3 columns */
+    gap: 20px;
+    padding: 20px;
   }
 
   .card {
-    width: 30rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    position: relative;
+    padding-bottom: 1rem;
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .card h2 {
-    font-size: 1.2em; 
-    margin-bottom: 10px;
+  .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.11);
   }
 
-  .card p {
-    font-size: 0.9em; 
-    color: #555;
+  .card-title {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 2;
+    padding: 6px 12px;
+    border-radius: 4px;
   }
+
+  .card-text {
+  font-size: 1.1rem;
+  color: #444;
+  padding: 1rem;
+  flex-grow: 1;
+  line-height: 1.5;
 }
 
-  @media (max-width: 480px) {
-    .growing, .keys, .focus, .about {
-      width: 100vw; 
-    }
-    .heroImg {
-    width: 100%;
-    height: auto;
-    }
-
-    .card-image {
-    aspect-ratio: 1 / 1; 
-    height: 150px;       
+  .card-btn-container {
+  align-self: flex-start; 
+  margin-top: auto; 
   }
 
-    .motto {
-      font-size: 18px;
+  .card-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #fff;
+    color: #008080;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .card-btn:hover {
+    color: rgb(9, 161, 161);
+  }
+
+  .arcadia-word {
+    color: #008080;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+   .section-hero {
+      width: 100vw;
     }
 
-    .hero-message {
-      font-size: 14px;
+    .heroImg {
+      max-width: 90%;
     }
 
-    .hero-button {
-      font-size: 12px;
-      padding: 8px 12px;
-    }
-
-    .growing-header {
-      font-size: 28px;
-    }
-
-    .growing-message {
-      font-size: 14px;
-    }
-
-    .growing-container {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .container {
-      padding: 0 1rem;
+    .card {
+      height: 100vh;
     }
 
     .keys-container {
-      margin-bottom: 30rem;
-      margin-top: 30rem;
+      margin-bottom: 10rem;
     }
 
-    .keys-header {
-      font-size: 24px;
-      margin-top: 20rem;
+    .card-title {
+      font-size: 1rem;
+      padding: 4px 10px;
     }
 
-    .keys-message {
-      font-size: 14px;
-      max-width: 90%;
+        .card-grid {
+      grid-template-columns: 1fr; /* Stack cards vertically */
     }
 
-    .about-header {
-      font-size: 28px;
+    .growing-container {
+    flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-hero {
+      width: 100vw;
     }
 
-    .about-message,
-    .about-hub {
-      font-size: 14px;
-      max-width: 90%;
+    .hero-button {
+      font-size: 0.9rem;
+      padding: 8px 14px;
+    }
+      .card {
+      height: 70vh;
     }
 
-    .about-container {
-      margin-top: 7rem;
+    .card-title {
+      font-size: 0.9rem;
+      padding: 4px 8px;
     }
 
-    .focus-header {
-      font-size: 24px;
-      
+    .card-btn {
+      font-size: 0.9rem;
     }
 
-    .focus-container {
-      margin-top: 7rem;
-    }
-    
-    .card {
-    width: 25rem;
-     
+    .growing-container {
+    flex-direction: column;
     }
 
-    .arcadia-word {
-      font-size: 16px;
-    }
+    .card-grid {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+  }
   }
 `;
 

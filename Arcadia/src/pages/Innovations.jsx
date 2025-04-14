@@ -9,6 +9,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Carousel from '../components/Carousel';
 // import customFetch from '../utils/customFetch';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 
 export const loader = async () => {
@@ -64,23 +66,48 @@ const Innovations = () => {
       <div className="card">
       <img src={eventsImg} alt="Events" className="card-image" />
         <h2 className='card-title'>Events</h2>
+        <p className='card-text'>
+        Join interactive forums, workshops, and roundtables designed to connect stakeholders and spark actionable 
+        dialogue around sustainability.
+      </p>
+        <div className="card-btn-container">
         <a href="/events-collaboration">
-        <button>Learn more</button>
+        <button className='card-btn'>
+  <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
+  Explore Events
+</button>
         </a>
+      </div>
       </div>
       <div className="card">
       <img src={KnowledgeImg} alt="Knowledge" className="card-image" />
         <h2 className='card-title'>Knowledge Portal</h2>
+        <p className='card-text'>
+        Access a curated library of insights, research, case studies, and best practices to 
+        support informed decision-making and continuous learning.
+      </p>
+        <div className="card-btn-container">
         <a href="/publications">
-        <button>Learn more</button>
+        <button className='card-btn'>
+        <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
+          Browse Publications</button>
         </a>
+      </div>
       </div>
       <div className="card">
       <img src={solutionsImg} alt="Innovation" className="card-image" />
         <h2 className='card-title'>Innovation & Solutions Exchange</h2>
+        <p className='card-text'>
+      Discover pioneering ideas, tools, and technologies that drive real-world impact and collaborate with 
+      changemakers shaping a sustainable future.
+    </p>
+        <div className="card-btn-container">
         <a href="initiatives">
-        <button>Learn more</button>
+        <button className='card-btn'>
+        <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
+          Discover Solutions</button>
         </a>
+        </div>
       </div>
       </div>
     </div>
