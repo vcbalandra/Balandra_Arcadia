@@ -21,7 +21,7 @@ import reports from '../assets/images/reports.jpg';
 
 export const loader = async () => {
   try {
-    const response = await fetch('http://localhost:5173/publications');
+    const response = await fetch('/publications');
     return response.data;
   } catch (error) {
    console.error(error);

@@ -15,7 +15,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 export const loader = async () => {
   try {
-    const response = await fetch('http://localhost:5173/company');
+    const response = await fetch('/company');
     return response.data;
   } catch (error) {
    alert(error);

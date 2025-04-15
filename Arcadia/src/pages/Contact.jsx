@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 export const loader = async () => {
   try {
-    const response = await fetch('http://localhost:5173/contact');
+    const response = await fetch('/contact');
     return response.data;
   } catch (error) {
     alert(error);

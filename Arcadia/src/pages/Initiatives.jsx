@@ -7,7 +7,7 @@ import customFetch from '../utils/customFetch';
 
 export const loader = async () => {
   try {
-    const response = await fetch('http://localhost:5173/initiatives');
+    const response = await fetch('/initiatives');
     return response.data;
   } catch (error) {
    console.error(error);
