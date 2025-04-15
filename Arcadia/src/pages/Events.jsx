@@ -12,7 +12,7 @@ import hackathon from '../assets/images/hackathon.jpg';
 
 export const loader = async () => {
   try {
-    const response = await fetch('/events-collaboration');
+    const response = await fetch('http://localhost:5173/events-collaboration');
     return response.data;
   } catch (error) {
     alert(error);
