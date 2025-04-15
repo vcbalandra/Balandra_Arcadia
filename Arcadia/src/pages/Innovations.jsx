@@ -11,6 +11,7 @@ import Carousel from '../components/Carousel';
 // import customFetch from '../utils/customFetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 
 export const loader = async () => {
@@ -71,12 +72,10 @@ const Innovations = () => {
         dialogue around sustainability.
       </p>
         <div className="card-btn-container">
-        <a href="/events-collaboration">
-        <button className='card-btn'>
-  <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
-  Explore Events
-</button>
-        </a>
+        <Link to="/events-collaboration" className="card-btn">
+      <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
+      Explore Events
+      </Link>
       </div>
       </div>
       <div className="card">
@@ -87,11 +86,10 @@ const Innovations = () => {
         support informed decision-making and continuous learning.
       </p>
         <div className="card-btn-container">
-        <a href="/publications">
-        <button className='card-btn'>
+        <Link to="/publications" className="card-btn">
         <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
-          Browse Publications</button>
-        </a>
+          Browse Publications
+        </Link>
       </div>
       </div>
       <div className="card">
@@ -102,11 +100,10 @@ const Innovations = () => {
       changemakers shaping a sustainable future.
     </p>
         <div className="card-btn-container">
-        <a href="initiatives">
-        <button className='card-btn'>
+        <Link to="/initiatives" className="card-btn">
         <FontAwesomeIcon icon={faArrowRight} style={{ marginRight: '8px' }} />
-          Discover Solutions</button>
-        </a>
+          Discover Solutions
+          </Link>
         </div>
       </div>
       </div>
