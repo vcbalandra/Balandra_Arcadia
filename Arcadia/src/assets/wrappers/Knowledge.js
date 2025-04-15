@@ -267,6 +267,7 @@ font-size 16px;
 text-align: center;
 max-width: 300px;
 margin-left: 2rem;
+color: #495057;
 }
 
 

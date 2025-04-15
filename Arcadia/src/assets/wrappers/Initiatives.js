@@ -34,6 +34,7 @@ const Wrapper = styled.div`
   font-size: 1.6rem;
   margin-bottom: 2rem;
   line-height: 1.6;
+  color: #495057;
 }
 
 .partner-entry {
@@ -56,6 +57,7 @@ const Wrapper = styled.div`
   font-size: 1.1rem;
   text-align: left;
   padding: 0 15px;
+  color: #495057;
 }
 
 .listed-btn {

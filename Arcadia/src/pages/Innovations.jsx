@@ -1,10 +1,10 @@
 import React from 'react'
 import { redirect } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Innovations';
-import heroImage from '../assets/images/hero-img.jpg';
-import solutionsImg from '../assets/images/solutions.svg';
-import KnowledgeImg from '../assets/images/knowledge.jpg';
-import eventsImg from '../assets/images/events.svg';
+import heroImage from '../assets/images/growing.jpg';
+import solutionsImg from '../assets/images/innovations-hub.jpg';
+import KnowledgeImg from '../assets/images/knowledge-hub.jpg';
+import eventsImg from '../assets/images/events-hub.jpg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Carousel from '../components/Carousel';

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import arcadiaBcg from '../images/background.jpg';
+import arcadiaBcg from '../images/background-arcadia.jpg';
 
 const Section = styled.section`
   color: white;
@@ -176,21 +176,23 @@ const Section = styled.section`
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.11);
   }
 
-  .card-title {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: bold;
-    z-index: 2;
-    padding: 6px 12px;
-    border-radius: 4px;
-  }
+.card-title {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 2;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.25); 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); 
+}
 
   .card-text {
   font-size: 1.1rem;
-  color: #444;
+  color: #868e96;
   padding: 1rem;
   flex-grow: 1;
   line-height: 1.5;
