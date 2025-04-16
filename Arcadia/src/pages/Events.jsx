@@ -10,6 +10,13 @@ import { Modal, Button } from 'react-bootstrap';
 import dialogues from '../assets/images/dialogues.jpg';
 import hackathon from '../assets/images/hackathon.jpg';
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString(undefined, options);
+};
+
+
 export const loader = async () => {
   try {
     const response = await fetch('/events-collaboration');
@@ -167,7 +174,9 @@ const Events = () => {
                 ) : (
                   upcomingEvents.map((event) => (
                     <div key={event._id} className="embla__slide">
+                      <h3 className='carousel-title'>Event</h3>
                       <h4 className='event-title'>{event.eventTitle}</h4>
+                      <p className='event-date'>Date - {formatDate(event.eventDate)}</p>
                       {event.eventImage && <img src={`http://localhost:5100/${event.eventImage}`} alt="Event" className="upcoming-img" />}
                       <button className='view-btn' onClick={() => handleViewEvent(event)}>View Event</button>
                     </div>
@@ -188,7 +197,9 @@ const Events = () => {
                 ) : (
                   previousEvents.map((event) => (
                     <div key={event._id} className="embla__slide">
+                      <h3 className='carousel-title'>Event</h3>
                       <h5 className='event-title'>{event.eventTitle}</h5>
+                      <p className='event-date'>Date - {formatDate(event.eventDate)}</p>
                       {event.eventImage && <img src={`http://localhost:5100/${event.eventImage}`} alt="Event" className="previous-img" />}
                       <button className='view-btn' onClick={() => handleViewEvent(event)}>View Event</button>
                     </div>

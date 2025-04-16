@@ -178,16 +178,42 @@ const Wrapper = styled.section`
   position: relative;
 }
 
+.carousel-title {
+  position: absolute;
+  top: 25vh;
+  left: 6vw;
+  color: #fff;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: bold;
+  z-index: 2;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.event-date {
+  position: absolute;
+  bottom: 30vh;
+  left: 6vw;
+  color: #fff;
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  font-weight: bold;
+  z-index: 2;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
 .event-title {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 24px;
+  font-size: clamp(1.2rem, 4vw, 2rem);
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Optional for readability */
   text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
   .previous {
@@ -235,13 +261,17 @@ const Wrapper = styled.section`
       text-align: center;
     }
 
-    .dialogues-title,
+    .dialogues-title {
+    font-size: 32px;
+      margin-top: 12rem;
+    }
+
     .campaigns-title {
       font-size: 32px;
     }
 
     .upcoming-title {
-        margin-top: 6rem;
+        margin-top: 30rem;
     }
 
     .dialogues-message,
@@ -250,11 +280,16 @@ const Wrapper = styled.section`
       max-width: 90%;
     }
 
-    .dialogueImg,
+    .dialogueImg {
+     width: 100%;
+      height: auto;
+      margin: 1rem 0;
+    }
+    
     .campaignImg {
       width: 100%;
       height: auto;
-      margin: 1rem 0;
+      margin-top: 40rem;
     }
 
     .dialogues-sessions,
@@ -269,8 +304,8 @@ const Wrapper = styled.section`
   }
 
   .view-btn {
-    padding: 8px 16px; /* Smaller padding on medium-sized screens */
-    font-size: 14px; /* Smaller font size */
+    padding: 8px 16px; 
+    font-size: 14px; 
   }
   }
 
@@ -279,20 +314,41 @@ const Wrapper = styled.section`
       width: 100vw;
     }
     
-    .dialogues-title,
+    .dialogues-title {
+      margin-top: 10rem;
+    }
     .campaigns-title {
       font-size: 28px;
-       margin-top: 3rem;
     }
 
     .upcoming-title {
         margin-top: 6rem;
     }
 
-    .dialogues-message,
+    .event-title {
+    font-size: 1.1rem;
+    }
+
+     .event-date {
+      font-size: 1.1rem;
+      bottom: 9vh;
+      left: 10vw;
+    } 
+     .carousel-title {
+      font-size: 1.1rem;
+      top: 9vh;
+      left: 10vw;
+    }
+
+    .dialogues-message {
+      font-size: 16px;
+      max-width: 100%;
+    }
+
     .campaigns-message {
       font-size: 16px;
       max-width: 100%;
+      margin-bottom: 22rem;
     }
 
     .dialogueImg,
@@ -310,7 +366,7 @@ const Wrapper = styled.section`
     
     .upcoming-img, .previous-img {
       margin-top: 1rem;
-      height: 20rem;
+      height: 16rem;
       width: 25rem;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
