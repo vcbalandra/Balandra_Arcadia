@@ -322,7 +322,7 @@ const Wrapper = styled.section`
     }
 
     .upcoming-title {
-        margin-top: 6rem;
+        margin-top: 20rem;
     }
 
     .event-title {
@@ -348,7 +348,6 @@ const Wrapper = styled.section`
     .campaigns-message {
       font-size: 16px;
       max-width: 100%;
-      margin-bottom: 22rem;
     }
 
     .dialogueImg,
