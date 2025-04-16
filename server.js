@@ -29,10 +29,22 @@ const app = express();
 // Calculate __dirname in ES modules
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://arcadia-bqe9.onrender.com'
+];
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173', 
+  origin: function (origin, callback) {
+    // Allow server-to-server or curl requests with no origin
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  credentials: true,  
+  credentials: true,
 };
 
 // Serve static files from 'uploads' directory
